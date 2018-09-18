@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body {
+  font-family: 'Raleway', serif;
+  margin: 0;
+}
+
+.app-container {
+  white-space-collapse: discard;
+
+}
+
+.sidebar-container {
+  display: inline-block;
+  width: 30%;
+  float: left;
+  overflow: auto;
+}
+
+.note-container {
+  display: inline-block;
+  width: 70%;
+  float: right;
+}
+
+.sidebar-content {
+    height: 89.5vh;
+
+    overflow-y: scroll;
+
+}
+
+.sidebar {
+  /*padding: 15px;*/
+  /*min-height: 100%;*/
+  width: 100%;
+
+  /*border-width: 5px;*/
+}
+
+.note {
+  padding: 20px 25px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box; 
+  border-width: 1px;
+  border-style: solid;
+  height: 100vh;
+  width: 100%;
+}
+
+.note-text {
+  height: 100%;
+  width: 100%;
+  border-radius: 0px;
+  resize: none;
+  border-width: 0px;
+}
+
+.note-title {
+  border-radius: 0px;
+  border-width: 0px;
+  width: 80%;
+  font-size: 3.6rem;
+}
+
+.note-text {
+  padding: 0px;
+}
+
+.note-text:hover {
+  border-radius: 0px;
+  border-width: 0px;
+}
+
+.note-text:focus {
+  border-radius: 0px;
+  border-width: 0px;
+}
+
+.note-content {
+  height: 83vh;
+}
+
+.note-header {
+  margin-bottom: 15px;
+}
+
+.note-header .date {
+  float: right;
+  margin-top: 0.50em;
+}
+
+input {
+  border-radius: 0 !important;
+  margin-bottom: 0;
+  border-color: black !important;
+}
+
+.note-preview {
+  padding: 15px;
+  border-width: 1px;
+  border-style: solid;
+  height: 150px;
+}
+
+.note-preview-header {
+  margin-bottom: 5px;
+}
+
+.note-preview-header p {
+  margin-bottom: 5px;
+  font-size: 1.25em;
+  display: inline-block;
+}
+
+.note-preview-header .date {
+  font-size: 0.7em;
+  margin-top: 0.25em;
+  float: right;
+}
+
+.note-preview-content {
+  font-size: 0.8em;
+}
+
+.note-interior {
+  height: 70px;
+}
+
+.note-preview:hover {
+  background-color: #f1f1f1;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+button {
+  border-radius: 0px;
+  border-width: 1px;
+  border-color: black;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #f1f1f1;
+}
+
+#add-note {
+  width: 100%;
+}
+
+#remove-btn {
+  border: none;
+  font-size: 1em !important;
+  float: right;
+  margin-right: 15px;
+  text-decoration: none;
+  color: black;
+  /*margin-top: 0.25em;*/
+}
+
+#remove-btn:hover {
+  font-weight: 800;
+  color: #27ae60;
+}
