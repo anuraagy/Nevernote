@@ -126,6 +126,7 @@ input {
 
 .note-interior {
   height: 70px;
+  overflow: auto;
 }
 
 .note-preview:hover {
@@ -156,7 +157,7 @@ button:hover {
   border: none;
   font-size: 1em !important;
   float: right;
-  margin-right: 15px;
+  /*margin-right: 15px;*/
   text-decoration: none;
   color: black;
   /*margin-top: 0.25em;*/
@@ -166,3 +167,79 @@ button:hover {
   font-weight: 800;
   color: #27ae60;
 }
+
+@media screen and (max-width: 1200px) {
+  .note-title {
+    width: 70%;
+    font-size: 2em;
+  }
+  .sidebar-content {
+    height: 87vh;
+  }
+
+  .note-content {
+    height: 80vh;
+  }
+
+  #remove-btn {
+    margin-top: 15px;
+    margin-right: 0px;
+  }
+
+  .note-text {
+    font-size: 0.8em;
+  }
+
+  .note-interior {
+    font-size: 0.75em;
+  }
+
+  .note-preview-header .date {
+    margin-top: 0.5em;
+  }
+
+  .note-preview-header {
+    font-size: 1em;
+  }
+
+}
+
+@media screen and (max-width: 815px) {
+  .note-title {
+    width: 50%;
+    font-size: 2em;
+  }
+
+  .note-header .date {
+    margin-top: 0.75em;
+    font-size: 0.8em;
+  }
+
+  .note-preview-header .date {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar-container {
+    width: 100%;
+  }
+
+  .note-container {
+    width: 100%;
+  }
+
+  .sidebar-content {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    height: 100%;
+  }
+
+  .note-preview {
+    display: inline-block;
+    vertical-align:top;
+    width: 91%;
+  }
+}
+
