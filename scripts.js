@@ -50,10 +50,14 @@ class Notes {
 }
 
 
-class NoteUI {
+class NoteComponent {
   static addNote() {
     const note = {name: "", description: "", id: "", timestamp: ""};
     this.updateNote(note);
+  }
+
+  static filterList(notes, query) {
+    return notes.filter(obj => obj.name.toLowerCase().trim() === query.toLowerCase().trim()) 
   }
 
   static updateSidebar(list) {
@@ -114,7 +118,7 @@ class NoteUI {
 
 // Initialize notes
 let notes = new Notes();
-NoteUI.updateSidebar(notes.getList());
+NoteComponent.updateSidebar(notes.getList());
 
 let searchBar = document.getElementById("searchInput");
 
@@ -122,16 +126,16 @@ searchBar.addEventListener("keyup", (event) => {
   const query = searchBar.value;
 
   if(query !== "") {
-    list = notes.getList().filter(obj => obj.name.toLowerCase().trim() === query.toLowerCase().trim())  
-    NoteUI.updateSidebar(list);
+    let list = NoteComponent.filterList(notes.getList(), query);
+    NoteComponent.updateSidebar(list);
   } else {
-    NoteUI.updateSidebar(notes.list);
+    NoteComponent.updateSidebar(notes.list);
   }
 })
 
 // Add listeners
 let addNoteButton = document.getElementById("add-note");
-addNoteButton.addEventListener("click", event => NoteUI.addNote());
+addNoteButton.addEventListener("click", event => NoteComponent.addNote());
 
 let deleteNoteButton = document.getElementById("remove-btn");
 deleteNoteButton.addEventListener("click", (event) => {
@@ -141,12 +145,12 @@ deleteNoteButton.addEventListener("click", (event) => {
 
   if(confirmDelete) {
     notes.delete(id);
-    NoteUI.updateSidebar(notes.getList());
+    NoteComponent.updateSidebar(notes.getList());
   }
 })
 
 if(notes.list.length === 0) {
-  NoteUI.addNote();
+  NoteComponent.addNote();
 }
 
 let notename = document.getElementById("note-name");
@@ -155,29 +159,26 @@ let notedescription = document.getElementById("note-text");
 
 
 notedescription.addEventListener("keyup", (event) => {
-  id = noteId.getAttribute("value");
+  let id = noteId.getAttribute("value");
   
   if(id === "") {
     const description = notedescription.value;
     const newId = notes.add("", description);
-    console.log("there");
 
     noteId.setAttribute("value", newId);
   } else {
-    console.log("here");
     const name = notename.value;
     const description = notedescription.value;
 
     notes.update(id, name, description);
   }
 
-  NoteUI.updateSidebar(notes.getList())
+  NoteComponent.updateSidebar(notes.getList())
   searchBar.value = "";
-  console.log("hello")
 });
  
 notename.addEventListener("keyup", (event) => {
-  id = noteId.getAttribute("value");
+  let id = noteId.getAttribute("value");
   
   if(id === "") {
     const name = notename.value;
@@ -192,9 +193,8 @@ notename.addEventListener("keyup", (event) => {
     notes.update(id, name, description)
   }
 
-  NoteUI.updateSidebar(notes.getList());
+  NoteComponent.updateSidebar(notes.getList());
   searchBar.value = "";
-  console.log("helloa");
 });
 
 
