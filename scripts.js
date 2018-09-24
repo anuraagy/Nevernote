@@ -14,13 +14,13 @@ class Notes {
     localStorage.setItem("notes", JSON.stringify(this.list));
   }
 
-  update(id, title, content) {
+  update(id, name, description) {
     this.list = this.list.map((obj) => {
       if(obj.id === id) {
         return {
           id: id,
-          title: title,
-          content: content, 
+          name: name,
+          description: description, 
           timestamp: new Date().toLocaleString()
         };
       } else {
@@ -30,13 +30,13 @@ class Notes {
     localStorage.setItem("notes", JSON.stringify(this.list));
   }
 
-  add(title, content) {
-    const id = Math.random().toString(36).substr(2, 15)
+  add(name, description) {
+    const id = Math.random().toString(36).substr(2, 15);
     
     this.list.unshift({
       id: id,
-      title: title,
-      content: content,
+      name: name,
+      description: description,
       timestamp: new Date().toLocaleString()
     })
     localStorage.setItem("notes", JSON.stringify(this.list));
@@ -52,8 +52,8 @@ class Notes {
 
 class NoteUI {
   static addNote() {
-    const note = {title: "", content: "", id: "", timestamp: ""};
-    this.updateNote(note)
+    const note = {name: "", description: "", id: "", timestamp: ""};
+    this.updateNote(note);
   }
 
   static updateSidebar(list) {
@@ -62,47 +62,47 @@ class NoteUI {
 
     if(list.length > 0) {
       list.forEach(note => {
-        let sidebar = document.getElementById("noteList")
-        let noteElement = document.createElement("div")
+        let sidebar = document.getElementById("noteList");
+        let noteElement = document.createElement("div");
 
-        noteElement.setAttribute("class", "note-preview")
-        noteElement.setAttribute("id", `note-${note.id}`)
+        noteElement.setAttribute("class", "note-preview");
+        noteElement.setAttribute("id", `note-${note.id}`);
 
-        let title = note.title || "Untitled note";
+        let name = note.name || "Unnamed note";
 
         let noteInterior = `<div class='note-preview-header'>
-                          <p>${title}</p>
+                          <p>${name}</p>
                           <p class='date'>${note.timestamp}</p>
                         </div> 
-                        <div class='note-preview-content'> 
-                          <p class='note-interior'>${note.content.substring(0,250)}</p> 
-                        </div> `
+                        <div class='note-preview-description'> 
+                          <p class='note-interior'>${note.description.substring(0,250)}</p> 
+                        </div> `;
 
         noteElement.innerHTML = noteInterior;
 
 
         noteElement.addEventListener("click", (event) => {
-          this.updateNote(note)
+          this.updateNote(note);
         })
 
-        sidebar.appendChild(noteElement)
+        sidebar.appendChild(noteElement);
       })
 
       this.updateNote(list[0]);
     } else {
-      sidebar.innerHTML = "<p style='text-align: center; margin-top: 15px;'>You don't have any notes</p>"
+      sidebar.innerHTML = "<p style='text-align: center; margin-top: 15px;'>You don't have any notes</p>";
     }
   }
 
   static updateNote(note) {
     let noteId = document.getElementById("note-id");
-    noteId.value = note.id
+    noteId.value = note.id;
 
-    let noteTitle = document.getElementById("note-title");
-    noteTitle.value = note.title
+    let notename = document.getElementById("note-name");
+    notename.value = note.name;
 
     let noteText = document.getElementById("note-text");
-    noteText.value = note.content;
+    noteText.value = note.description;
 
     let noteTimestamp = document.getElementById("note-timestamp");
     noteTimestamp.innerHTML = note.timestamp; 
@@ -114,15 +114,15 @@ class NoteUI {
 
 // Initialize notes
 let notes = new Notes();
-NoteUI.updateSidebar(notes.getList())
+NoteUI.updateSidebar(notes.getList());
 
 let searchBar = document.getElementById("searchInput");
 
 searchBar.addEventListener("keyup", (event) => {
-  const query = searchBar.value
+  const query = searchBar.value;
 
   if(query !== "") {
-    list = notes.getList().filter(obj => obj.title.toLowerCase().trim() === query.toLowerCase().trim())  
+    list = notes.getList().filter(obj => obj.name.toLowerCase().trim() === query.toLowerCase().trim())  
     NoteUI.updateSidebar(list);
   } else {
     NoteUI.updateSidebar(notes.list);
@@ -131,13 +131,13 @@ searchBar.addEventListener("keyup", (event) => {
 
 // Add listeners
 let addNoteButton = document.getElementById("add-note");
-addNoteButton.addEventListener("click", event => NoteUI.addNote())
+addNoteButton.addEventListener("click", event => NoteUI.addNote());
 
 let deleteNoteButton = document.getElementById("remove-btn");
 deleteNoteButton.addEventListener("click", (event) => {
   const id = deleteNoteButton.getAttribute("data-id");
   
-  let confirmDelete = confirm("Are you sure you want to delete this note?")
+  let confirmDelete = confirm("Are you sure you want to delete this note?");
 
   if(confirmDelete) {
     notes.delete(id);
@@ -146,29 +146,29 @@ deleteNoteButton.addEventListener("click", (event) => {
 })
 
 if(notes.list.length === 0) {
-  NoteUI.addNote()
+  NoteUI.addNote();
 }
 
-let noteTitle = document.getElementById("note-title");
+let notename = document.getElementById("note-name");
 let noteId = document.getElementById("note-id");
-let noteContent = document.getElementById("note-text");
+let notedescription = document.getElementById("note-text");
 
 
-noteContent.addEventListener("keyup", (event) => {
+notedescription.addEventListener("keyup", (event) => {
   id = noteId.getAttribute("value");
   
   if(id === "") {
-    const content = noteContent.value;
-    const newId = notes.add("", content);
+    const description = notedescription.value;
+    const newId = notes.add("", description);
     console.log("there");
 
     noteId.setAttribute("value", newId);
   } else {
     console.log("here");
-    const title = noteTitle.value
-    const content = noteContent.value;
+    const name = notename.value;
+    const description = notedescription.value;
 
-    notes.update(id, title, content)
+    notes.update(id, name, description);
   }
 
   NoteUI.updateSidebar(notes.getList())
@@ -176,20 +176,20 @@ noteContent.addEventListener("keyup", (event) => {
   console.log("hello")
 });
  
-noteTitle.addEventListener("keyup", (event) => {
+notename.addEventListener("keyup", (event) => {
   id = noteId.getAttribute("value");
   
   if(id === "") {
-    const title = noteTitle.value
-    const newId = notes.add(title, "");
+    const name = notename.value;
+    const newId = notes.add(name, "");
 
     noteId.setAttribute("value", newId);
   } else {
     // debugger
-    const title = noteTitle.value;
-    const content = noteContent.value;
+    const name = notename.value;
+    const description = notedescription.value;
 
-    notes.update(id, title, content)
+    notes.update(id, name, description)
   }
 
   NoteUI.updateSidebar(notes.getList());

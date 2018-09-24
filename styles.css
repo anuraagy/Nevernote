@@ -57,7 +57,7 @@ body {
   border-width: 0px;
 }
 
-.note-title {
+.note-name {
   border-radius: 0px;
   border-width: 0px;
   width: 80%;
@@ -78,7 +78,7 @@ body {
   border-width: 0px;
 }
 
-.note-content {
+.note-description {
   height: 83vh;
 }
 
@@ -169,7 +169,7 @@ button:hover {
 }
 
 @media screen and (max-width: 1200px) {
-  .note-title {
+  .note-name {
     width: 70%;
     font-size: 2em;
   }
@@ -177,7 +177,7 @@ button:hover {
     height: 87vh;
   }
 
-  .note-content {
+  .note-description {
     height: 80vh;
   }
 
@@ -205,7 +205,7 @@ button:hover {
 }
 
 @media screen and (max-width: 815px) {
-  .note-title {
+  .note-name {
     width: 50%;
     font-size: 2em;
   }
